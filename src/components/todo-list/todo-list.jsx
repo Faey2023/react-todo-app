@@ -7,10 +7,19 @@ export const TodoList = (props) => {
 
   const handleDelete = (id) => {
     // Function to delete task
+    setTodos(todos.filter((todo) => todo.id !== id));
   };
 
   const toggleCheck = (id) => {
     // Function to toggle task
+    setTodos(
+      todos.map((todo) => {
+        if (todo.id === id) {
+          return { ...todo, checked: !todo.checked };
+        }
+        return todo;
+      })
+    );
   };
 
   const handleKeyUp = (e, id) => {
@@ -27,7 +36,7 @@ export const TodoList = (props) => {
           {todos.map((todoItem) => (
             <Checkbox
               key={todoItem.id}
-              label={todoItem.label}
+              label={todoItem.task}
               checked={todoItem.checked}
               onClick={() => toggleCheck(todoItem.id)}
               onKeyUp={(e) => handleKeyUp(e, todoItem.id)}
@@ -36,7 +45,9 @@ export const TodoList = (props) => {
           ))}
         </div>
       ) : (
-        <div className="no-todos">Looks like you&apos;re absolutely free today!</div>
+        <div className="no-todos">
+          Looks like you&apos;re absolutely free today!
+        </div>
       )}
     </div>
   );
