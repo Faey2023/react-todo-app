@@ -1,4 +1,5 @@
-import * as React from "react";
+import React from "react";
+import { TextField, Button } from "@mui/material";
 import "./todo-form.scss";
 
 export const TodoForm = (props) => {
@@ -6,35 +7,34 @@ export const TodoForm = (props) => {
   const [task, setTask] = React.useState("");
 
   const handleAddTodo = () => {
-    // Function to add todo
     if (task.trim() !== "") {
       const newTodo = {
         id: todos.length + 1,
         task: task.trim(),
         checked: false,
-        // completed: false,
       };
       setTodos([...todos, newTodo]);
       setTask("");
-      // console.log(todos);
     }
   };
+
   const handleKeyUp = (e) => {
     if (e.keyCode === 13) {
       handleAddTodo();
     }
   };
+
   return (
     <div className="todo-form">
-      <input
+      <TextField
         placeholder="Enter new task"
         value={task}
         onChange={(e) => setTask(e.target.value)}
         onKeyUp={handleKeyUp}
       />
-      <button type="button" onClick={handleAddTodo}>
+      <Button variant="contained" onClick={handleAddTodo}>
         Add task
-      </button>
+      </Button>
     </div>
   );
 };

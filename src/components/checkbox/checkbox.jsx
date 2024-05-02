@@ -1,4 +1,6 @@
-import * as React from "react";
+import React from "react";
+import { Checkbox as MuiCheckbox, IconButton } from "@mui/material";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import "./checkbox.scss";
 
 export const Checkbox = ({ onClick, checked, onDelete, label, onKeyUp }) => (
@@ -11,16 +13,21 @@ export const Checkbox = ({ onClick, checked, onDelete, label, onKeyUp }) => (
       onClick={onClick}
       onKeyUp={onKeyUp}
     >
-      <input
+      <MuiCheckbox
         tabIndex="-1"
-        type="checkbox"
         checked={checked}
         onChange={onClick}
+        color="primary"
+        inputProps={{ "aria-label": "primary checkbox" }}
       />
       <div className={checked ? "checkbox-checked" : ""}>{label}</div>
     </div>
-    <button type="button" className="checkbox-delete" onClick={onDelete}>
-      x
-    </button>
+    <IconButton
+      aria-label="delete"
+      onClick={onDelete}
+      className="checkbox-delete"
+    >
+      <DeleteOutlineOutlinedIcon />
+    </IconButton>
   </div>
 );
